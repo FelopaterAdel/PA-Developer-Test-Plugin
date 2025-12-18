@@ -26,25 +26,29 @@ class PA_Test_Admin_Page {
         global $wpdb;
         $entries = $wpdb->get_results( "SELECT * FROM {$this->table_name} ORDER BY created_at DESC" );
         ?>
-        <div class="wrap">
-            <h1>PA Developer Test Plugin</h1>
+        <div style="padding: 30px; max-width: 700px; margin: 50px auto;">
+            <div style="background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 30px;">
+            <h1 style="margin-top: 0; color: #333;">PA Developer Test Plugin</h1>
 
             <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
                 <input type="hidden" name="action" value="pa_test_save">
                 <?php wp_nonce_field( 'pa_test_nonce' ); ?>
 
-                <input type="text" name="entry_text" required>
+                <input type="text" name="entry_text" placeholder="Enter text..." required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
                 <button class="button button-primary">Save</button>
             </form>
 
-            <hr>
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
 
-            <h2>Saved Entries</h2>
-            <ul>
-                <?php foreach ( $entries as $entry ) : ?>
-                    <li><?php echo esc_html( $entry->entry_text ); ?></li>
-                <?php endforeach; ?>
+            <h2 style="color: #333;">Saved Entries</h2>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+            <?php foreach ( $entries as $entry ) : ?>
+                <li style="background: #f9f9f9; padding: 12px 15px; margin-bottom: 8px; border-left: 4px solid #0073aa; border-radius: 4px;">
+                <?php echo esc_html( $entry->entry_text ); ?>
+                </li>
+            <?php endforeach; ?>
             </ul>
+            </div>
         </div>
         <?php
     }
